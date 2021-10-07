@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import requests
+import random
 
 # Create your views here.
+data = {}
 
 
 def getLandingPage(response):
@@ -50,3 +53,11 @@ def getCategoriesPage(response, category_name=None):
 
 def getAboutUsPage(response):
     return render(response, "main/aboutUsPage.html", {})
+
+
+def getQuizPage(response, category_name):
+    data = requests.get(
+        "https://opentdb.com/api.php?amount=10&category=21&type=multiple").json()['results']
+    for questions in data:
+        questions['incorrect_answers'].append(questions['correct_answer'])
+    return render(response, "main/quizPage.html", {'category': category_name, 'data': data})

@@ -6,5 +6,5 @@ urlpatterns = [
     path("categories/", views.getCategoriesPage, name="CategoriesPage"),
     path("about-us/", views.getAboutUsPage, name="aboutUs"),
     path("category/<str:category_name>",
-         views.getCategoriesPage, name="CategoryPage")
+         views.getQuizPage, name="quizPage")
 ]

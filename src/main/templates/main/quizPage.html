@@ -1,0 +1,36 @@
+{% extends 'main/index.html' %} 
+
+{% block title %}
+<title>About Us | Quizzify</title>
+{% endblock %} 
+
+
+{% block aboutUsPage %} 
+<div class="container" style="padding-bottom: 50px;">
+    <div class="row">
+    <div class="col-sm-12 center">
+        <h1>{{category|upper}}</h1>
+    </div>
+</div>
+    <form action="">
+    {% csrf_token %}
+    {% for question in data %}
+            {{question}}
+            <div class="question-box">     
+                
+                <span class="question">{{question.question | safe}}</span>
+                    
+                <div class="options">
+                    {% for option in question.incorrect_answers %}
+                    <span class="option">
+                        <input type="radio" name="question{{forloop.parentloop.counter}}" id="{{forloop.parentloop.counter}}{{forloop.counter}}">
+                        <label for="{{forloop.parentloop.counter}}{{forloop.counter}}">{{option|safe}}</label>
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+        {{data}}
+</div>
+{% endblock %}
