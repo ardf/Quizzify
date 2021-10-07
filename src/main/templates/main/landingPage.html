@@ -1,0 +1,30 @@
+{% extends 'main/index.html' %} 
+
+{% block title %}
+<title>Home | Quizzify</title>
+{% endblock %} 
+
+{% block nav_home%}class="active"{% endblock %}
+
+
+{% block landingPage %} 
+{% load static %}
+<br /><br />
+<div class="container-fluid justify-content-center">
+  <div class="row">
+    <div class="col-md-7">
+      <img src="{% static 'img/StudyingConcept.svg' %}" alt="" />
+    </div>
+    <div class="col-md-3" style="margin: 20px 20px 10vh">
+      <div class="container right-column justify-content-center">
+        <br /><br />
+        <h1>Quizzify Now</h1>
+        <p>
+          A quick and simple quiz generator to test your knowledge on the go
+        </p>
+        <a class="btn btn-dark" href="/categories/">Take a quiz</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

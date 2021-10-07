@@ -1,0 +1,68 @@
+{% extends 'main/index.html' %} 
+
+{% block title %}
+<title>Categories | Quizzify</title>
+{% endblock %} 
+
+{% block nav_categories%}class="active"{% endblock %}
+
+
+{% block categoriesPage %} 
+{% load static %}
+<br /><br />
+<div class="container">
+
+<div class="row">
+    <div class="col-sm-12 center">
+        <h1>Choose Category</h1>
+    </div>
+</div>
+<div class="row container" style="padding-bottom: 50px;">
+    {% for category in categories %}
+    <div class="cards col-sm-3">
+        <a href="/category/{{category.name | lower}}">
+
+            <div class="card-div center">
+                <img class="card-image center darken" src="{{category.image}}" alt="404">
+                <p class="card-title">{{category.name}}</p>
+            </div>
+        </a>
+        </div>
+    {% endfor %}
+</div>
+</div>
+
+<script>
+   $( document ).ready(gridifyCards);
+   $( window ).on( "resize", gridifyCards );
+function gridifyCards(){
+    let screenWidth = $(window).width();
+    if(screenWidth >= 1100){
+        $('.cards').removeClass('col-sm-4');
+        $('.cards').removeClass('col-sm-6');
+        $('.cards').removeClass('col-sm-12');
+        $('.cards').addClass('col-sm-3');
+    }
+    else if(screenWidth >=900){
+        console.log("900");
+        $('.cards').removeClass('col-sm-3');
+        $('.cards').removeClass('col-sm-6');
+        $('.cards').removeClass('col-sm-12');
+        $('.cards').addClass('col-sm-4');
+    }
+    else if(screenWidth >=792){
+        console.log("792");
+        $('.cards').removeClass('col-sm-3');
+        $('.cards').removeClass('col-sm-4');
+        $('.cards').removeClass('col-sm-12');
+        $('.cards').addClass('col-sm-6');
+    }
+        else if(screenWidth >=494){
+        $('.cards').removeClass('col-sm-3');
+        $('.cards').removeClass('col-sm-4');
+        $('.cards').removeClass('col-sm-6');
+        $('.cards').addClass('col-sm-12');
+    }
+}
+</script>
+{% endblock %}
