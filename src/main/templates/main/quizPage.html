@@ -1,7 +1,7 @@
 {% extends 'main/index.html' %} 
 
 {% block title %}
-<title>About Us | Quizzify</title>
+<title>{{category|title}} | Quizzify</title>
 {% endblock %} 
 
 
@@ -15,7 +15,6 @@
     <form action="">
     {% csrf_token %}
     {% for question in data %}
-            {{question}}
             <div class="question-box">     
                 
                 <span class="question">{{question.question | safe}}</span>
@@ -31,6 +30,5 @@
             </div>
             {% endfor %}
         </form>
-        {{data}}
 </div>
 {% endblock %}
