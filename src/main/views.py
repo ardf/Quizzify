@@ -55,7 +55,7 @@ def getCategoriesPage(response, category_name=None):
     return render(response, "main/CategoriesPage.html", {'categories': categories})
 
 
-def getQuizPage(response, category_name: str):
+def getQuizPage(request, category_name: str):
     category_id = "1"
     for category in categories:
         if(category['name'].casefold() == category_name.casefold()):
@@ -67,6 +67,23 @@ def getQuizPage(response, category_name: str):
         difficulty = "&difficulty=easy"
     data = requests.get(
         "https://opentdb.com/api.php?amount=10&category="+category_id+difficulty+"&type=multiple", verify=True).json()['results']
+    request.session['data'] = data
     for questions in data:
         questions['incorrect_answers'].append(questions['correct_answer'])
-    return render(response, "main/quizPage.html", {'category': category_name, 'data': data})
+    return render(request, "main/quizPage.html", {'category': category_name, 'data': data})
+
+
+def getResultsPage(request, category_name: str):
+    userAnswers = []
+    correctAnswers = []
+    score = 0
+    data = request.session.get('data', None)
+    if request.method == "POST":
+        for question in data:
+            correctAnswers.append(question['correct_answer'])
+        for i in range(10):
+            userAnswers.append(request.POST['question'+str(i+1)])
+            if userAnswers[i] == correctAnswers[i]:
+                score += 1
+
+        return render(request, "main/resultsPage.html", {'userAnswers': userAnswers, 'correctAnswers': correctAnswers, 'score': score, 'data': data})

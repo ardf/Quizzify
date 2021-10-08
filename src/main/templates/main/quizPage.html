@@ -6,13 +6,13 @@
 
 
 {% block aboutUsPage %} 
-<div class="container" style="padding-bottom: 50px;">
+<div class="container" style="padding-bottom: 80px;">
     <div class="row">
     <div class="col-sm-12 center">
         <h1>{{category|upper}}</h1>
     </div>
 </div>
-    <form action="">
+    <form action="{{category|lower}}/results" method="post">
     {% csrf_token %}
     {% for question in data %}
             <div class="question-box">     
@@ -22,13 +22,18 @@
                 <div class="options">
                     {% for option in question.incorrect_answers %}
                     <span class="option">
-                        <input type="radio" name="question{{forloop.parentloop.counter}}" id="{{forloop.parentloop.counter}}{{forloop.counter}}">
+                        <input type="radio" value="{{option|safe}}" name="question{{forloop.parentloop.counter}}" id="{{forloop.parentloop.counter}}{{forloop.counter}}" required>
                         <label for="{{forloop.parentloop.counter}}{{forloop.counter}}">{{option|safe}}</label>
                     </span>
                     {% endfor %}
                 </div>
             </div>
             {% endfor %}
+            <div class="row">
+                <div class="col-sm-12 center">
+                    <input type="submit" class="btn btn-success" value="Submit"/>
+                </div>
+            </div>
         </form>
 </div>
 {% endblock %}
