@@ -66,7 +66,7 @@ def getQuizPage(response, category_name: str):
     else:
         difficulty = "&difficulty=easy"
     data = requests.get(
-        "https://opentdb.com/api.php?amount=10&category="+category_id+difficulty+"&type=multiple", verify=False).json()['results']
+        "https://opentdb.com/api.php?amount=10&category="+category_id+difficulty+"&type=multiple", verify=True).json()['results']
     for questions in data:
         questions['incorrect_answers'].append(questions['correct_answer'])
     return render(response, "main/quizPage.html", {'category': category_name, 'data': data})
