@@ -1,5 +1,30 @@
-{{userAnswers}}
-<br>
-{{correctAnswers}}
-<br>
-{{score}}
+{% extends 'main/index.html' %} 
+
+{% block title %}
+<title>Results | Quizzify</title>
+{% endblock %} 
+
+{% block landingPage %} 
+<div class="container" style="padding-bottom:50px">
+    <div class="result-div center">
+        You have scored {{score}}/10
+    </div>
+    <br>
+    <ol>
+    {% for question in data %}
+        <div class="row center">
+            <li>
+                <div class="question" style="text-align: left;">
+                    {{question.question|safe}}
+                </div>
+                <div class="answer" style="text-align: left;">
+                    {{question.correct_answer|safe}}
+                </div>
+            </li>
+            <br>
+        </div>
+        {% endfor %} 
+    </ol>
+</div>
+
+{% endblock %} 
