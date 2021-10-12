@@ -1,1 +1,1 @@
-gunicorn = gunicorn -w 3 test:app
+web: gunicorn quiz_app.wsgi
