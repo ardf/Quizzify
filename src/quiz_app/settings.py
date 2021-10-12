@@ -28,9 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = [
-    "main/static"
-]
+# STATICFILES_DIRS = [
+#     "main/static"
+# ]
 
 # Application definition
 
